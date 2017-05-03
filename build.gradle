@@ -1,19 +1,53 @@
-buildscript {
-    repositories {
-        jcenter()
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
+
+    defaultConfig {
+        applicationId "com.company.myapp"
+        minSdkVersion 19
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
     }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.3'
-        classpath 'com.google.gms:google-services:3.0.0'
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    lintOptions {
+        warning 'InvalidPackage'
     }
 }
 
-allprojects {
-    repositories {
-        jcenter()
+repositories {
+    flatDir {
+        dirs 'libs'
     }
+    maven { url "http://dl.bintray.com/populov/maven" }
+    mavenCentral()
+    jcenter()
 }
 
-task clean(type: Delete) {
-    delete rootProject.buildDir
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:25.2.0'
+    compile 'com.android.support:support-v4:25.2.0'
+    compile 'com.android.support:design:25.2.0'
+    compile 'com.android.support:percent:25.2.0'
+    compile 'com.google.code.gson:gson:2.7'
+    compile 'com.google.android.gms:play-services-maps:10.0.+'
+    compile 'com.google.android.gms:play-services-location:10.0.+'
+    compile 'com.google.maps.android:android-maps-utils:0.4'
+    compile 'org.apache.httpcomponents:httpclient:4.5.3'
+    compile 'org.apache.commons:commons-lang3:3.5'
+    compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    compile 'com.squareup.retrofit2:converter-scalars:2.1.0'
+    compile 'com.squareup.okhttp:okhttp:2.7.5'
+    compile 'com.commit451:PhotoView:1.2.5'
+    compile 'com.squareup.picasso:picasso:2.5.2'
 }
